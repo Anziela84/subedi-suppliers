@@ -37,25 +37,40 @@
         </div>
     </section>
 
+    <!-- Trust Strip -->
+    <section class="home-trust">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ul class="home-trust-list">
+                <li><strong>{{ $productCount }}</strong><span>Products in the catalogue</span></li>
+                <li><strong>{{ $categories->count() }}</strong><span>Metal categories</span></li>
+                @foreach (config('home.trust') as $item)
+                    <li><strong>{{ $item['value'] }}</strong><span>{{ $item['label'] }}</span></li>
+                @endforeach
+            </ul>
+        </div>
+    </section>
+
     <!-- Featured Products Carousel -->
     <section class="featured-products" style="background: var(--color-cream, #FAF8F3);">
-        <div class="text-center">
-            <span class="eyebrow">Our range</span>
-            <h2 class="section-heading text-center font-heading text-3xl font-bold">Featured <span class="accent">Products</span></h2>
-        </div>
-        <div class="ornament"><span></span></div>
-
-        <div class="swiper featured-swiper">
-            <div class="swiper-wrapper">
-                @foreach ($featuredProducts as $product)
-                    <div class="swiper-slide">
-                        <x-product-card :product="$product" />
-                    </div>
-                @endforeach
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <span class="eyebrow">Our range</span>
+                <h2 class="section-heading text-center font-heading text-3xl font-bold">Featured <span class="accent">Products</span></h2>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="ornament"><span></span></div>
+
+            <div class="swiper featured-swiper">
+                <div class="swiper-wrapper">
+                    @foreach ($featuredProducts as $product)
+                        <div class="swiper-slide">
+                            <x-product-card :product="$product" />
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
     </section>
 
@@ -87,22 +102,99 @@
         </div>
     </section>
 
-    <!-- Brand Story Teaser -->
-    <section id="about" class="py-16 md:py-24" style="background: var(--color-cream, #FAF8F3);">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="eyebrow">Our story</span>
-            <h2 class="section-heading font-heading text-3xl font-bold mb-4">Heritage & <span class="accent">Craft</span></h2>
+    <!-- Shop by use -->
+    <section class="py-16 md:py-24" style="background: var(--color-cream, #FAF8F3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <span class="eyebrow">Find your piece</span>
+                <h2 class="section-heading font-heading text-3xl font-bold">Shop by <span class="accent">use</span></h2>
+            </div>
             <div class="ornament"><span></span></div>
-            <p class="mt-4 leading-relaxed" style="color: var(--color-ink, #1E252B);">
-                For generations, SubediSuppliers has connected Nepali artisans with homes that value true craftsmanship.
-                Every piece we supply carries the legacy of metalwork traditions passed down through families — shaped by hand,
-                finished with care, and built to last.
-            </p>
-            <a href="{{ route('about') }}" class="inline-flex items-center mt-6 text-brand-blue font-medium hover:underline">Learn more about us
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </a>
+
+            <div class="occasion-grid" data-reveal-stagger>
+                @foreach (config('home.occasions') as $occasion)
+                    <a href="{{ route('products.index', ['category' => $occasion['category']]) }}" class="occasion-tile occasion-{{ $occasion['category'] }}" data-reveal>
+                        <span class="occasion-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                        <h3>{{ $occasion['title'] }}</h3>
+                        <p>{{ $occasion['text'] }}</p>
+                        <span class="occasion-link">Explore &rarr;</span>
+                    </a>
+                @endforeach
+            </div>
         </div>
     </section>
+
+    <!-- Know your metals -->
+    <section class="metals-section section-dark py-16 md:py-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <span class="eyebrow metals-eyebrow">The guide</span>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold" style="color: var(--color-cream, #FAF8F3);">Know your <span style="color:#C9A66B">metals</span></h2>
+                <p class="metals-intro">What each one is best for, and how to keep it looking its best.</p>
+            </div>
+
+            <div class="metals-tabs" role="tablist">
+                @foreach (config('home.metals') as $metal)
+                    <button type="button" role="tab" class="metals-tab{{ $loop->first ? ' active' : '' }}" id="tab-{{ $metal['slug'] }}" aria-controls="panel-{{ $metal['slug'] }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}" data-metal="{{ $metal['slug'] }}">{{ $metal['name'] }}</button>
+                @endforeach
+            </div>
+
+            @foreach (config('home.metals') as $metal)
+                <div class="metals-panel" role="tabpanel" id="panel-{{ $metal['slug'] }}" aria-labelledby="tab-{{ $metal['slug'] }}"{{ $loop->first ? '' : ' hidden' }}>
+                    <h3 class="metals-tagline">{{ $metal['tagline'] }}</h3>
+                    <div class="metals-cols">
+                        <div>
+                            <h4>Best for</h4>
+                            <ul>
+                                @foreach ($metal['uses'] as $use)
+                                    <li>{{ $use }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Care</h4>
+                            <ul>
+                                @foreach ($metal['care'] as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="metals-cta" href="{{ route('products.index', ['category' => $metal['slug']]) }}">Shop {{ $metal['name'] }} &rarr;</a>
+                </div>
+            @endforeach
+
+            <p class="metals-story">Want the story behind SubediSuppliers? <a href="{{ route('about') }}">Read about us</a></p>
+        </div>
+    </section>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var tabs = document.querySelectorAll('.metals-tab');
+                var panels = document.querySelectorAll('.metals-panel');
+
+                tabs.forEach(function (tab) {
+                    tab.addEventListener('click', function () {
+                        tabs.forEach(function (t) {
+                            t.classList.remove('active');
+                            t.setAttribute('aria-selected', 'false');
+                        });
+                        panels.forEach(function (p) {
+                            p.hidden = true;
+                        });
+
+                        tab.classList.add('active');
+                        tab.setAttribute('aria-selected', 'true');
+                        var panel = document.getElementById('panel-' + tab.dataset.metal);
+                        if (panel) {
+                            panel.hidden = false;
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
 
     @section('scripts')
         <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

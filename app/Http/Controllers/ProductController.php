@@ -65,6 +65,23 @@ class ProductController extends Controller
             ->limit(4)
             ->get();
 
+        if ($related->count() < 4) {
+            $existingIds = $related->pluck('id')->push($product->id)->all();
+
+            $topup = Product::with('category')
+                ->active()
+                ->whereHas('category', function ($q) {
+                    $q->active();
+                })
+                ->whereNotIn('id', $existingIds)
+                ->orderByDesc('is_featured')
+                ->ordered()
+                ->limit(4 - $related->count())
+                ->get();
+
+            $related = $related->concat($topup);
+        }
+
         return view('products.show', compact('product', 'related'));
     }
 }

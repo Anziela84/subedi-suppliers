@@ -34,6 +34,12 @@ class HomeController extends Controller
             ->withCount('products')
             ->get();
 
-        return view('home', compact('featuredProducts', 'categories'));
+        $productCount = Product::active()
+            ->whereHas('category', function ($query) {
+                $query->active();
+            })
+            ->count();
+
+        return view('home', compact('featuredProducts', 'categories', 'productCount'));
     }
 }

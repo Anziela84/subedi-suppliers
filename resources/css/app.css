@@ -3,7 +3,7 @@
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
 
-@theme {
+@theme static {
     --color-brand-blue: #0047AB;
     --color-deep-navy: #102A43;
     --color-cream: #FAF8F3;

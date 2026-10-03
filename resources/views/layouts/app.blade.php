@@ -44,30 +44,52 @@
     <main class="grow">
         @yield('content')
     </main>
-    <footer class="section-dark border-t" style="border-top-color: rgba(250, 248, 243, 0.15);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <footer class="site-footer section-dark">
+        <div class="site-footer-grain" aria-hidden="true"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
                 <div>
-                    <p class="font-heading font-semibold" style="color: var(--color-cream, #FAF8F3);">SubediSuppliers</p>
-                    <p class="text-sm mt-1" style="color: rgba(250, 248, 243, 0.7);">&copy; {{ date('Y') }} SubediSuppliers. All rights reserved.</p>
+                    <p class="font-heading text-xl font-semibold" style="color: var(--color-cream, #FAF8F3);">SubediSuppliers</p>
+                    <p class="mt-2 text-sm" style="color: rgba(250, 248, 243, 0.75);">Copper, brass, kasa, steel and aluminium — objects made to last.</p>
+                    @if(config('site.whatsapp'))
+                        <a href="https://wa.me/{{ config('site.whatsapp') }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded bg-[#25D366] text-white hover:bg-[#1ebc57] transition text-sm font-medium">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0 11.93 11.93 0 0 0 1.38 3.48 11.93 11.93 0 0 0 0 12a11.93 11.93 0 0 0 1.38 8.52A11.93 11.93 0 0 0 12 24a11.93 11.93 0 0 0 10.62-3.48A11.93 11.93 0 0 0 24 12a11.93 11.93 0 0 0 3.48-8.52zM12 22a10.12 10.12 0 0 1-5.16-1.42l-.36-.2-3.06.8.82-2.98-.24-.36A10.12 10.12 0 1 1 22 12a10.12 10.12 0 0 1-10 10zm5.88-7.5a7.86 7.86 0 0 1-4.2 1.2 4.14 4.14 0 0 1-1.98-.54l-1.08-.6-1.14.3a8.96 8.96 0 0 1-4.02-2.64 39.36 39.36 0 0 1-1.44-2.04 4.44 4.44 0 0 1-.24-1.5c0-.42.18-.78.54-1.02l.3-.3.54-.54a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6l-.3.3a6.84 6.84 0 0 0-.36 3.12 6.84 6.84 0 0 0 9.72 0 6.84 6.84 0 0 0 0-9.72.45.45 0 0 1 0-.6l1.62-1.62a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6 8.34 8.34 0 0 1-1.38 3.24z"/></svg>
+                            WhatsApp us
+                        </a>
+                    @endif
                 </div>
 
-                <nav class="flex flex-wrap gap-6 text-sm" style="color: rgba(250, 248, 243, 0.8);">
-                    <a href="{{ route('home') }}" class="hover:text-brand-blue transition">Home</a>
-                    <a href="{{ route('products.index') }}" class="hover:text-brand-blue transition">Products</a>
-                    <a href="{{ route('categories.index') }}" class="hover:text-brand-blue transition">Categories</a>
-                    <a href="{{ route('about') }}" class="hover:text-brand-blue transition">About</a>
-                    <a href="{{ route('contact') }}" class="hover:text-brand-blue transition">Contact</a>
-                </nav>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--color-heritage, #9A7448);">Explore</p>
+                    <nav class="flex flex-col gap-2 text-sm" style="color: rgba(250, 248, 243, 0.8);">
+                        <a href="{{ route('home') }}" class="hover:text-[#C9A66B] transition">Home</a>
+                        <a href="{{ route('products.index') }}" class="hover:text-[#C9A66B] transition">Products</a>
+                        <a href="{{ route('categories.index') }}" class="hover:text-[#C9A66B] transition">Categories</a>
+                        <a href="{{ route('about') }}" class="hover:text-[#C9A66B] transition">About</a>
+                        <a href="{{ route('contact') }}" class="hover:text-[#C9A66B] transition">Contact</a>
+                    </nav>
+                </div>
 
-                @if(config('site.whatsapp'))
-                    <a href="https://wa.me/{{ config('site.whatsapp') }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0 11.93 11.93 0 0 0 1.38 3.48 11.93 11.93 0 0 0 0 12a11.93 11.93 0 0 0 1.38 8.52A11.93 11.93 0 0 0 12 24a11.93 11.93 0 0 0 10.62-3.48A11.93 11.93 0 0 0 24 12a11.93 11.93 0 0 0 3.48-8.52zM12 22a10.12 10.12 0 0 1-5.16-1.42l-.36-.2-3.06.8.82-2.98-.24-.36A10.12 10.12 0 1 1 22 12a10.12 10.12 0 0 1-10 10zm5.88-7.5a7.86 7.86 0 0 1-4.2 1.2 4.14 4.14 0 0 1-1.98-.54l-1.08-.6-1.14.3a8.96 8.96 0 0 1-4.02-2.64 39.36 39.36 0 0 1-1.44-2.04 4.44 4.44 0 0 1-.24-1.5c0-.42.18-.78.54-1.02l.3-.3.54-.54a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6l-.3.3a6.84 6.84 0 0 0-.36 3.12 6.84 6.84 0 0 0 9.72 0 6.84 6.84 0 0 0 0-9.72.45.45 0 0 1 0-.6l1.62-1.62a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6 8.34 8.34 0 0 1-1.38 3.24z"/>
-                        </svg>
-                        WhatsApp us
-                    </a>
-                @endif
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--color-heritage, #9A7448);">Visit &amp; contact</p>
+                    <div class="text-sm space-y-1" style="color: rgba(250, 248, 243, 0.8);">
+                        @if(config('site.address_lines'))
+                            @foreach(config('site.address_lines') as $line)
+                                <p>{{ $line }}</p>
+                            @endforeach
+                        @endif
+                        @if(config('site.business_hours'))
+                            <p class="mt-2">{{ config('site.business_hours') }}</p>
+                        @endif
+                        @if(config('site.emails') && is_array(config('site.emails')) && count(config('site.emails')) > 0)
+                            <p class="mt-2">{{ config('site.emails')[0] }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-4" style="border-top: 1px solid rgba(250, 248, 243, 0.12);">
+                <p class="text-xs" style="color: rgba(250, 248, 243, 0.55);">&copy; {{ date('Y') }} SubediSuppliers. All rights reserved.</p>
             </div>
         </div>
     </footer>

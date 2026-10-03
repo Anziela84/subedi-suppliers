@@ -33,8 +33,13 @@ class ProductForm
                     ->visibility('public')
                     ->image()
                     ->imageEditor()
+                    ->imageEditorAspectRatios(['1:1'])
+                    ->imageCropAspectRatio('1:1')
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('1200')
+                    ->imageResizeTargetHeight('1200')
                     ->maxSize(2048)
-                    ->helperText('Recommended: 1200x1500px, max 2MB, JPG/PNG/WebP')
+                    ->helperText('Square photo, 1200x1200px, plain background, JPG/PNG/WebP')
                     ->directory('products'),
                 TextInput::make('dimensions')
                     ->nullable(),

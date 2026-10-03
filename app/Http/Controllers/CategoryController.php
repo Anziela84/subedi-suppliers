@@ -11,6 +11,7 @@ class CategoryController extends Controller
     {
         $categories = Category::active()
             ->ordered()
+            ->with(['products' => fn ($q) => $q->active()->ordered()])
             ->withCount(['products as active_products_count' => function ($query) {
                 $query->where('is_active', true);
             }])

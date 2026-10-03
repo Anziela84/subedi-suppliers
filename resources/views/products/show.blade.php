@@ -14,9 +14,9 @@
 @endpush
 
 @section('content')
-    <section class="page-banner section-dark">
+    <section class="page-banner section-dark page-banner--compact">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="flex items-center gap-2 text-sm mb-4" style="color: rgba(250, 248, 243, 0.8);">
+            <nav class="flex items-center gap-2 text-sm" style="color: rgba(250, 248, 243, 0.8);">
                 <a href="{{ route('home') }}" class="hover:underline">Home</a>
                 <span>/</span>
                 <a href="{{ route('products.index') }}" class="hover:underline">Products</a>
@@ -31,19 +31,19 @@
     <section class="py-12 md:py-20" style="background: var(--color-cream, #FAF8F3);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-                <div class="product-detail-media">
-                    <div class="aspect-[4/5] rounded-2xl overflow-hidden" style="background: var(--color-sand, #F5F1E8);">
+                <div class="product-detail-media lg:sticky lg:top-28">
+                    <div class="product-detail-frame">
                         @if($product->image && file_exists(storage_path('app/public/' . $product->image)))
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-contain" />
                         @else
                             <x-media-placeholder :name="$product->name" :category="$product->category" class="w-full h-full" />
                         @endif
                     </div>
                 </div>
 
-                <div class="space-y-5">
+                <div class="product-detail-info space-y-5">
                     <span class="product-badge">{{ $product->category->name }}</span>
-                    <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold" style="color: var(--color-ink, #1E252B);">{{ $product->name }}</h1>
+                    <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mt-1" style="color: var(--color-ink, #1E252B); line-height: 1.1;">{{ $product->name }}</h1>
 
                     <p class="text-lg">
                         @if($product->price !== null && $product->price !== '')
@@ -60,7 +60,7 @@
                     @endif
 
                     @if($product->dimensions || $product->size || $product->weight)
-                        <div class="overflow-hidden rounded-lg border" style="border-color: var(--color-border, #D9D5CC);">
+                        <div class="product-specs-table">
                             <table class="w-full text-sm">
                                 <tbody>
                                     @if($product->dimensions)
@@ -116,7 +116,7 @@
                 </div>
                 <div class="ornament"><span></span></div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-10">
+                <div class="products-grid">
                     @foreach($related as $product)
                         <x-product-card :product="$product" />
                     @endforeach

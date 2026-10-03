@@ -3,68 +3,65 @@
 @section('title', 'Products')
 
 @section('content')
-    <section class="products-hero">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="products-hero-inner">
-                <div>
-                    <span class="products-hero-eyebrow">The Collection</span>
-                    <h1 class="products-hero-heading mt-3">Objects made to last.</h1>
-                    <p class="products-hero-desc">
-                        Explore our collection of copper, brass, kasa, steel, and aluminium products — selected for everyday use, lasting quality, and timeless appeal.
-                    </p>
-                    <div class="products-hero-ornament" aria-hidden="true"></div>
-                </div>
-                <div class="products-hero-image-wrap">
-                    <img src="{{ asset('images/placeholder-product.jpg') }}" alt="Featured product" />
-                </div>
-            </div>
-
-            <div class="products-hero-meta">
-                <div class="category-nav" role="tablist" aria-label="Product categories">
-                    <a href="{{ route('products.index') }}"
-                       role="tab"
-                       aria-selected="{{ !request()->query('category') ? 'true' : 'false' }}"
-                       class="category-nav-link {{ (!request()->query('category') && !request()->query('q') && !request()->query('sort')) ? 'active' : '' }}">
-                        All
-                    </a>
-                    @foreach($categories as $category)
-                        <a href="{{ route('products.index', ['category' => $category->slug]) }}"
-                           role="tab"
-                           aria-selected="{{ request()->query('category') === $category->slug ? 'true' : 'false' }}"
-                           class="category-nav-link {{ request()->query('category') === $category->slug ? 'active' : '' }}">
-                            {{ $category->name }}
-                        </a>
-                    @endforeach
-                </div>
-
-                <form method="GET" action="{{ route('products.index') }}" class="products-toolbar">
-                    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:ml-auto">
-                        <div class="products-search">
-                            <svg class="products-search-icon w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
-                            <input
-                                type="text"
-                                name="q"
-                                value="{{ old('q', request()->query('q')) }}"
-                                placeholder="Search products..."
-                                maxlength="80"
-                                class="products-search-input"
-                            />
-                        </div>
-
-                        <select name="sort" onchange="this.form.submit()" class="products-sort">
-                            <option value="featured" {{ request()->query('sort') === 'featured' ? 'selected' : '' }}>Featured</option>
-                            <option value="newest" {{ request()->query('sort') === 'newest' ? 'selected' : '' }}>Newest</option>
-                            <option value="name" {{ request()->query('sort') === 'name' ? 'selected' : '' }}>Name A–Z</option>
-                        </select>
-
-                        <input type="hidden" name="category" value="{{ request()->query('category') }}" />
-                    </div>
-                </form>
-            </div>
+    <section class="products-hero section-dark">
+        <div class="products-hero-grain" aria-hidden="true"></div>
+        <div class="products-hero-glow" aria-hidden="true"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px8 relative z-10">
+            <span class="products-hero-eyebrow">The Collection</span>
+            <h1 class="products-hero-heading">Objects made to last.</h1>
+            <div class="products-hero-ornament" aria-hidden="true"></div>
+            <p class="products-hero-desc">
+                Explore our collection of copper, brass, kasa, steel, and aluminium products — selected for everyday use, lasting quality, and timeless appeal.
+            </p>
         </div>
     </section>
 
-    <section class="pb-10 md:pb-16" style="background: var(--color-cream, #FAF8F3);">
+    <section class="products-filter-bar" style="background: var(--color-cream, #FAF8F3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="category-nav" role="tablist" aria-label="Product categories">
+                <a href="{{ route('products.index') }}"
+                   role="tab"
+                   aria-selected="{{ !request()->query('category') ? 'true' : 'false' }}"
+                   class="category-nav-link {{ (!request()->query('category') && !request()->query('q') && !request()->query('sort')) ? 'active' : '' }}">
+                    All
+                </a>
+                @foreach($categories as $category)
+                    <a href="{{ route('products.index', ['category' => $category->slug]) }}"
+                       role="tab"
+                       aria-selected="{{ request()->query('category') === $category->slug ? 'true' : 'false' }}"
+                       class="category-nav-link {{ request()->query('category') === $category->slug ? 'active' : '' }}">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </div>
+
+            <form method="GET" action="{{ route('products.index') }}" class="products-toolbar">
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:ml-auto">
+                    <div class="products-search">
+                        <svg class="products-search-icon w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
+                        <input
+                            type="text"
+                            name="q"
+                            value="{{ old('q', request()->query('q')) }}"
+                            placeholder="Search products..."
+                            maxlength="80"
+                            class="products-search-input"
+                        />
+                    </div>
+
+                    <select name="sort" onchange="this.form.submit()" class="products-sort">
+                        <option value="featured" {{ request()->query('sort') === 'featured' ? 'selected' : '' }}>Featured</option>
+                        <option value="newest" {{ request()->query('sort') === 'newest' ? 'selected' : '' }}>Newest</option>
+                        <option value="name" {{ request()->query('sort') === 'name' ? 'selected' : '' }}>Name A–Z</option>
+                    </select>
+
+                    <input type="hidden" name="category" value="{{ request()->query('category') }}" />
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="py-10 md:py-16" style="background: var(--color-cream, #FAF8F3);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between mb-4">
                 <p class="products-count">
@@ -85,7 +82,7 @@
                 </div>
 
                 <div class="products-pagination">
-                    {{ $products->links() }}
+                    {{ $products->links('pagination.products') }}
                 </div>
             @else
                 <div class="products-empty">
