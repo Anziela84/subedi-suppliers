@@ -36,8 +36,11 @@ class CategoryForm
                     ->imageResizeMode('cover')
                     ->imageResizeTargetWidth('1600')
                     ->imageResizeTargetHeight('1200')
-                    ->maxSize(2048)
-                    ->helperText('Landscape photo 4:3, 1600x1200px, subject in the centre, JPG/PNG/WebP')
+                    ->maxSize(10240)
+                    ->acceptedFileTypes(['image/jpeg','image/png','image/webp'])
+                    ->openable()
+                    ->deletable(true)
+                    ->helperText('Landscape photo 4:3, JPG/PNG/WebP, up to 10 MB. JPG or WebP is recommended for faster loading.')
                     ->directory('categories'),
                 \Filament\Forms\Components\TextInput::make('sort_order')
                     ->numeric()

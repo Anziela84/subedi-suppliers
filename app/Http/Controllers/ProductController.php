@@ -46,6 +46,12 @@ class ProductController extends Controller
 
         $categories = Category::active()->ordered()->get();
 
+        $fixedOrder = ['copper', 'brass', 'kasa', 'steel', 'aluminium'];
+        $categories = $categories->sortBy(function ($category) use ($fixedOrder) {
+            $index = array_search($category->slug, $fixedOrder);
+            return $index === false ? PHP_INT_MAX : $index;
+        })->values();
+
         return view('products.index', compact('products', 'categories'));
     }
 

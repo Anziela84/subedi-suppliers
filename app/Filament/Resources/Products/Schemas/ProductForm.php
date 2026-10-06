@@ -38,9 +38,26 @@ class ProductForm
                     ->imageResizeMode('cover')
                     ->imageResizeTargetWidth('1200')
                     ->imageResizeTargetHeight('1200')
-                    ->maxSize(2048)
-                    ->helperText('Square photo, 1200x1200px, plain background, JPG/PNG/WebP')
+                    ->maxSize(10240)
+                    ->acceptedFileTypes(['image/jpeg','image/png','image/webp'])
+                    ->openable()
+                    ->deletable(true)
+                    ->helperText('Square photo, 1200x1200px, plain background, JPG/PNG/WebP, up to 10 MB.')
                     ->directory('products'),
+                FileUpload::make('images')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->image()
+                    ->multiple()
+                    ->reorderable()
+                    ->acceptedFileTypes(['image/jpeg','image/png','image/webp'])
+                    ->maxSize(10240)
+                    ->maxFiles(5)
+                    ->directory('products')
+                    ->helperText('Extra gallery photos. The main image above is always shown first.'),
+                TextInput::make('finish')
+                    ->nullable()
+                    ->helperText('e.g. Matte, Polished, Hammered'),
                 TextInput::make('dimensions')
                     ->nullable(),
                 TextInput::make('size')

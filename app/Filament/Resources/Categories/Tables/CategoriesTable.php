@@ -17,6 +17,8 @@ class CategoriesTable
         return $table
             ->columns([
                 ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
                     ->size(80)
                     ->square(),
                 TextColumn::make('name')

@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <nav class="products-pagination" role="navigation" aria-label="Pagination">
-        <p class="results-text">Showing {{ $paginator->firstItem() ?? 0 }}–{{ $paginator->lastItem() ?? 0 }} of {{ $paginator->total() }} results</p>
+        <p class="results-text">Showing {{ $paginator->firstItem() ?? 0 }}–{{ $paginator->lastItem() ?? 0 }} of {{ $paginator->total() }} products</p>
         <div class="pagination-links">
             @if ($paginator->onFirstPage())
                 <span class="disabled" aria-disabled="true" aria-label="Previous page">&laquo;</span>

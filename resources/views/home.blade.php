@@ -21,7 +21,7 @@
                         Bringing generations of Nepali craftsmanship to your home.
                     </p>
                     <div class="mt-8 hero-cta">
-                        <a href="{{ route('products.index') }}" class="inline-flex items-center px-6 py-3 rounded btn-primary font-medium transition">View Our Products</a>
+                        <a href="{{ route('products.index') }}" class="btn-primary">View Our Products</a>
                     </div>
                 </div>
                 <!-- Right: Visual scene layers -->

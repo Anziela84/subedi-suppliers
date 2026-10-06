@@ -15,6 +15,12 @@ return [
 
     'business_hours' => 'Sun - Fri, 9:00 AM - 6:00 PM',
 
+    'hours' => [
+        'days' => [0, 1, 2, 3, 4, 5],
+        'open' => '09:00',
+        'close' => '18:00',
+    ],
+
     'address_lines' => [
         // Replace with actual address lines
         'Itahari',
