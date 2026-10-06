@@ -500,6 +500,7 @@ body {
 /* Pagination */
 .products-pagination {
     margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 .products-pagination > nav {
     display: flex;
