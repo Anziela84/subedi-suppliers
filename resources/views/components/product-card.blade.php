@@ -8,7 +8,11 @@
 
 <a href="{{ route('products.show', $product->slug) }}" class="product-card group block">
     <div class="product-card-image">
-        <img src="{{ $product->coverUrl() }}" alt="{{ $product->name }}" loading="lazy" />
+        @php
+            $coverUrl = $product->coverUrl();
+            $coverSize = @getimagesize(public_path(parse_url($coverUrl, PHP_URL_PATH)));
+        @endphp
+        <img src="{{ $coverUrl }}" alt="{{ $product->name }}" loading="lazy" decoding="async" @if($coverSize) width="{{ $coverSize[0] }}" height="{{ $coverSize[1] }}" @endif />
     </div>
     <div class="product-card-body">
         <span class="product-card-category">{{ $product->category->name ?? '' }}</span>

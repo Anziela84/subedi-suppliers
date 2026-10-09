@@ -27,10 +27,10 @@
                 <!-- Right: Visual scene layers -->
                 <div class="hero-visual">
                     <div class="hero-scene hero-traditional">
-                        <img src="{{ asset('images/khasaimage.png') }}" alt="Traditional Nepali metalware" class="hero-scene-img" />
+                        <img src="{{ asset('images/khasaimage.webp') }}" alt="Traditional Nepali metalware" class="hero-scene-img" width="1672" height="941" fetchpriority="high" />
                     </div>
                     <div class="hero-scene hero-modern">
-                        <img src="{{ asset('images/steelimage.png') }}" alt="Everyday modern metalware" class="hero-scene-img" />
+                        <img src="{{ asset('images/steelimage.webp') }}" alt="Everyday modern metalware" class="hero-scene-img" width="1671" height="941" fetchpriority="high" />
                     </div>
                 </div>
             </div>

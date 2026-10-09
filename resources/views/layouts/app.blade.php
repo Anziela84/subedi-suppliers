@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('title', 'SubediSuppliers')</title>
+    <meta name="description" content="@yield('meta_description', 'SubediSuppliers — Nepali metalware in copper, brass, kasa, steel and aluminium. Everyday essentials, traditional materials, chosen for the homes they become part of.')" />
+    <link rel="canonical" href="{{ url()->current() }}" />
+    <meta property="og:title" content="@yield('title', 'SubediSuppliers')" />
+    <meta property="og:description" content="@yield('meta_description', 'SubediSuppliers — Nepali metalware in copper, brass, kasa, steel and aluminium. Everyday essentials, traditional materials, chosen for the homes they become part of.')" />
+    <meta property="og:type" content="@yield('og_type', 'website')" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="@yield('og_image', asset('images/logo.png'))" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

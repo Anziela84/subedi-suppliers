@@ -28,15 +28,15 @@ class Product extends Model
 
         $slug = $this->category->slug ?? '';
         $fallback = match ($slug) {
-            'copper' => 'images/copper.png',
-            'brass' => 'images/brass.png',
-            'kasa' => 'images/khasaimage.png',
-            'steel' => 'images/steelimage.png',
-            'aluminium' => 'images/aluminium.jfif',
+            'copper' => 'images/copper.webp',
+            'brass' => 'images/brass.webp',
+            'kasa' => 'images/khasaimage.webp',
+            'steel' => 'images/steelimage.webp',
+            'aluminium' => 'images/aluminium.webp',
             default => null,
         };
 
-        return $fallback ? asset($fallback) : asset('images/placeholder-product.jpg');
+        return $fallback ? asset($fallback) : asset('images/placeholder-product.svg');
     }
 
     public function galleryUrls(): array

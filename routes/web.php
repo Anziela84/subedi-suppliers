@@ -5,9 +5,20 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/sitemap.xml', function () {
+    $products = Product::active()
+        ->whereHas('category', fn ($q) => $q->active())
+        ->orderBy('name')
+        ->get();
+
+    return response()->view('sitemap', compact('products'))
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');

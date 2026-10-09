@@ -6,17 +6,24 @@
     @php
         // Uploaded image first, then the bundled fallback photo for each metal.
         $fallbacks = [
-            'copper'    => 'images/copper.png',
-            'brass'     => 'images/brass.png',
-            'kasa'      => 'images/khasaimage.png',
-            'steel'     => 'images/steelimage.png',
-            'aluminium' => 'images/aluminium.jfif',
+            'copper'    => 'images/copper.webp',
+            'brass'     => 'images/brass.webp',
+            'kasa'      => 'images/khasaimage.webp',
+            'steel'     => 'images/steelimage.webp',
+            'aluminium' => 'images/aluminium.webp',
         ];
         $imageFor = function ($category) use ($fallbacks) {
             if ($category->image && file_exists(storage_path('app/public/' . $category->image))) {
                 return asset('storage/' . $category->image);
             }
             return isset($fallbacks[$category->slug]) ? asset($fallbacks[$category->slug]) : null;
+        };
+        $dimsFor = function ($url) {
+            if (! $url) {
+                return null;
+            }
+            $size = @getimagesize(public_path(parse_url($url, PHP_URL_PATH)));
+            return $size ? [$size[0], $size[1]] : null;
         };
     @endphp
 
@@ -36,7 +43,8 @@
                             <a href="#cat-{{ $category->slug }}" class="cat-swatch" style="--i: {{ $loop->index }};">
                                 <span class="cat-swatch-img">
                                     @if($imageFor($category))
-                                        <img src="{{ $imageFor($category) }}" alt="" loading="lazy" />
+                                        @php $swatchSize = $dimsFor($imageFor($category)); @endphp
+                                        <img src="{{ $imageFor($category) }}" alt="" loading="lazy" decoding="async" @if($swatchSize) width="{{ $swatchSize[0] }}" height="{{ $swatchSize[1] }}" @endif />
                                     @endif
                                 </span>
                                 <span class="cat-swatch-label">{{ $category->name }}</span>
@@ -55,9 +63,7 @@
                         <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                            id="cat-{{ $category->slug }}"
                            class="cat-row"
-                           data-reveal>
-                            <div class="cat-row-body">
-                                <span class="cat-row-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                           data-reveal>                                <span class="cat-row-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 <h2>{{ $category->name }}</h2>
                                 <p class="cat-row-desc">{{ $category->description }}</p>
                                 @if($category->products->count())
@@ -76,7 +82,8 @@
                                 <div class="cat-photo">
                                     <div class="cat-photo-zoom">
                                         @if($imageFor($category))
-                                            <img src="{{ $imageFor($category) }}" alt="{{ $category->name }}" loading="lazy" data-parallax />
+                                            @php $photoSize = $dimsFor($imageFor($category)); @endphp
+                                            <img src="{{ $imageFor($category) }}" alt="{{ $category->name }}" loading="lazy" decoding="async" data-parallax @if($photoSize) width="{{ $photoSize[0] }}" height="{{ $photoSize[1] }}" @endif />
                                         @else
                                             <x-media-placeholder :name="$category->name" :category="$category" class="cat-photo-placeholder" />
                                         @endif

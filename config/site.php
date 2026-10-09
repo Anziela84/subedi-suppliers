@@ -29,6 +29,8 @@ return [
 
     'whatsapp' => env('SITE_WHATSAPP', ''),
 
+    'admin_emails' => array_values(array_filter(array_map('trim', explode(',', (string) env('ADMIN_EMAILS', ''))), fn ($email) => $email !== '')),
+
     'map_embed_url' => env('SITE_MAP_EMBED_URL', null),
 
     'map_directions_url' => env('SITE_MAP_DIRECTIONS_URL', 'https://www.google.com/maps?q=Itahari,Nepal'),

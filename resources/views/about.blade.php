@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'About Us | SubediSuppliers')
-@push('head-meta')
-    <meta name="description" content="{{ config('about.intro') }}" />
-@endpush
+
+@section('meta_description', config('about.intro'))
 
 @php
     $about = config('about');

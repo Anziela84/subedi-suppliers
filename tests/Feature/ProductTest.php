@@ -14,17 +14,20 @@ class ProductTest extends TestCase
     public function test_products_index_only_lists_active_products(): void
     {
         $activeCategory = Category::factory()->create(['is_active' => true]);
-        $inactiveCategory = Category::factory()->create(['is_active' => true]);
+        $inactiveCategory = Category::factory()->create(['is_active' => false]);
 
         $activeProduct = Product::factory()->create(['category_id' => $activeCategory->id, 'is_active' => true, 'name' => 'Active Product']);
         Product::factory()->create(['category_id' => $activeCategory->id, 'is_active' => false, 'name' => 'Inactive Product']);
-        Product::factory()->create(['category_id' => $inactiveCategory->id, 'is_active' => true, 'name' => 'Other Product']);
+        $hiddenProduct = Product::factory()->create(['category_id' => $inactiveCategory->id, 'is_active' => true, 'name' => 'Other Product']);
 
         $response = $this->get('/products');
 
         $response->assertStatus(200);
         $response->assertSee('Active Product');
         $response->assertDontSee('Inactive Product');
+        $response->assertDontSee('Other Product');
+
+        $this->get('/products/' . $hiddenProduct->slug)->assertStatus(404);
     }
 
     public function test_products_index_filters_by_category(): void

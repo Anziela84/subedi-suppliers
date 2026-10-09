@@ -18,7 +18,7 @@ class StoreContactMessageRequest extends FormRequest
             'email' => ['required', 'email', 'max:150'],
             'subject' => ['required', 'in:general,products,orders,other'],
             'message' => ['required', 'string', 'min:10', 'max:2000'],
-            'website' => ['nullable', 'string', 'max:0'],
+            'website' => ['nullable', 'string'],
         ];
     }
 
@@ -33,15 +33,5 @@ class StoreContactMessageRequest extends FormRequest
             'message.min' => 'Your message should be at least 10 characters.',
             'message.max' => 'Your message cannot exceed 2000 characters.',
         ];
-    }
-
-    protected function prepareForValidation(): void
-    {
-        if ($this->filled('website')) {
-            // Honeypot filled: silently pretend success, store nothing
-            $this->merge([
-                'website' => null,
-            ]);
-        }
     }
 }

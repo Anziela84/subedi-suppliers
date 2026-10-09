@@ -4,7 +4,7 @@
 
 @section('content')
     @php
-        $heroImage = asset('images/copper.png'); // swap this later for a real photo
+        $heroImage = asset('images/copper.webp'); // swap this later for a real photo
     @endphp
     <section class="products-hero">
         <div class="products-hero-media" aria-hidden="true" style="background-image: url('{{ $heroImage }}');"></div>

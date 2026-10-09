@@ -1,17 +1,16 @@
 @extends('layouts.app')
 
+@php
+    $metaDescription = $product->description
+        ? mb_substr(strip_tags($product->description), 0, 150)
+        : $product->name . ' — ' . ($product->category->name ?? 'SubediSuppliers');
+@endphp
+
 @section('title', $product->name)
 
-@push('head-meta')
-    @if($product->description)
-        <meta name="description" content="{{ mb_substr(strip_tags($product->description), 0, 150) }}" />
-        <meta property="og:title" content="{{ $product->name }}" />
-        <meta property="og:description" content="{{ mb_substr(strip_tags($product->description), 0, 150) }}" />
-        @if($product->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image))
-            <meta property="og:image" content="{{ asset('storage/' . $product->image) }}" />
-        @endif
-    @endif
-@endpush
+@section('meta_description', $metaDescription)
+
+@section('og_image', $product->coverUrl())
 
 @section('content')
     @php
@@ -50,8 +49,11 @@
                             </button>
                             <div class="product-detail-thumbs-track">
                                 @foreach($gallery as $index => $url)
+                                    @php
+                                        $thumbSize = @getimagesize(public_path(parse_url($url, PHP_URL_PATH)));
+                                    @endphp
                                     <button type="button" class="product-detail-thumb{{ $index === 0 ? ' is-active' : '' }}" data-index="{{ $index }}" aria-label="View image {{ $index + 1 }}">
-                                        <img src="{{ $url }}" alt="{{ $product->name }} {{ $index + 1 }}" loading="lazy" />
+                                        <img src="{{ $url }}" alt="{{ $product->name }} {{ $index + 1 }}" loading="lazy" decoding="async" @if($thumbSize) width="{{ $thumbSize[0] }}" height="{{ $thumbSize[1] }}" @endif />
                                     </button>
                                 @endforeach
                             </div>
@@ -62,12 +64,17 @@
                     @endif
 
                     <div class="product-detail-main-image-wrap">
+                        @php
+                            $mainSize = @getimagesize(public_path(parse_url($gallery[0], PHP_URL_PATH)));
+                        @endphp
                         <img
                             src="{{ $gallery[0] }}"
                             alt="{{ $product->name }}"
                             class="product-detail-main-image"
                             data-index="0"
                             data-total="{{ count($gallery) }}"
+                            fetchpriority="high"
+                            @if($mainSize) width="{{ $mainSize[0] }}" height="{{ $mainSize[1] }}" @endif
                         />
                         @if($hasGallery)
                             <button type="button" class="product-detail-main-arrow product-detail-main-prev" aria-label="Previous image">
