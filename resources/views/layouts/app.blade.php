@@ -42,6 +42,20 @@
         </div>
     </header>
 
+    <!-- Mobile nav overlay (outside header to escape backdrop-filter containing block) -->
+    <nav class="site-nav-mobile" id="siteNavMobile" aria-label="Primary" hidden>
+        <a href="{{ route('home') }}" class="site-nav-logo" aria-label="SubediSuppliers home">
+            <img src="{{ asset('images/logo-footer-gold.png') }}" alt="SubediSuppliers" width="133" height="44">
+        </a>
+        <ul class="nav-links">
+            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ route('products.index') }}" class="{{ request()->routeIs('products.*') ? 'active' : '' }}">Products</a></li>
+            <li><a href="{{ route('categories.index') }}" class="{{ request()->routeIs('categories.*') ? 'active' : '' }}">Categories</a></li>
+            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
+            <li class="nav-cta-item"><a href="{{ route('contact') }}" class="nav-cta {{ request()->routeIs('contact') ? 'active' : '' }}">Enquire</a></li>
+        </ul>
+    </nav>
+
     <main class="grow">
         @yield('content')
     </main>
