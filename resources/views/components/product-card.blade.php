@@ -16,12 +16,15 @@
         @php
             $specParts = [];
             if(($product->size ?? '') !== '' && ($product->size ?? '') !== null) $specParts[] = $product->size;
-            if(($product->dimensions_display ?? '') !== '' && ($product->dimensions_display ?? '') !== null) $specParts[] = $product->dimensions_display;
             $specText = implode(' · ', $specParts);
         @endphp
         @if($specText)
             <p class="product-card-specs">{{ $specText }}</p>
         @endif
-        <span class="product-card-price-link">Enquire for price <span aria-hidden="true">&nbsp;&rarr;</span></span>
+        @if($product->price !== null && $product->price !== '')
+            <span class="product-card-price">Rs {{ number_format((float) $product->price, 0) }}</span>
+        @else
+            <span class="product-card-price-link">Enquire for price <span aria-hidden="true">&nbsp;&rarr;</span></span>
+        @endif
     </div>
 </a>

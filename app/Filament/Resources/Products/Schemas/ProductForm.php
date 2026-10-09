@@ -58,18 +58,16 @@ class ProductForm
                 TextInput::make('finish')
                     ->nullable()
                     ->helperText('e.g. Matte, Polished, Hammered'),
-                TextInput::make('dimensions')
-                    ->nullable(),
                 TextInput::make('size')
                     ->nullable(),
                 TextInput::make('weight')
                     ->nullable(),
                 TextInput::make('price')
+                    ->required()
                     ->numeric()
-                    ->nullable()
+                    ->minValue(1)
                     ->prefix('Rs')
-                    ->helperText('Leave empty to show "Enquire for price" on the website')
-                    ->minValue(0),
+                    ->helperText('Shown on the website. Price is required for every product.'),
                 TextInput::make('sort_order')
                     ->numeric()
                     ->default(0)

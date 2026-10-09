@@ -521,6 +521,14 @@ body {
     gap: 0.3rem;
     color: var(--color-deep-navy, #102A43);
 }
+.product-card-price {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-deep-navy, #102A43);
+    display: inline-block;
+    margin-top: 0.5rem;
+}
 
 /* Stagger animation */
 .stagger-item {
@@ -1012,6 +1020,12 @@ body {
     color: var(--color-ink, #1E252B);
     font-weight: 500;
 }
+.product-detail-price-note {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.8rem;
+    color: var(--color-muted, #68717A);
+    margin-top: 0.25rem;
+}
 .product-detail-description {
     font-family: var(--font-heading, 'Playfair Display', serif);
     font-size: 1.05rem;
@@ -1093,6 +1107,21 @@ body {
     border-color: var(--color-deep-navy, #102A43);
     color: var(--color-deep-navy, #102A43);
 }
+
+@media (max-width: 900px) {
+    .product-detail-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .product-detail-btn-primary {
+        width: 100%;
+    }
+    .product-detail-btn-copy {
+        width: 100%;
+        flex: none;
+    }
+}
+
 .product-detail-copy-tooltip {
     position: absolute;
     bottom: calc(100% + 8px);

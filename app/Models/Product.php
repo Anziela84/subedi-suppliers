@@ -86,7 +86,6 @@ class Product extends Model
     {
         $parts = array_filter([
             $this->size ?: null,
-            $this->dimensions_display ?: null,
             $this->weight_display ?: null,
         ]);
 

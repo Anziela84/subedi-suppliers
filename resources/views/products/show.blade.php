@@ -20,7 +20,13 @@
         $relatedSameCategory = $related->filter(fn ($item) => $item->category_id === $product->category_id)->count() === $related->count();
         $highlightsKey = $product->category->slug ?? 'default';
         $highlights = config("product_highlights.{$highlightsKey}", config('product_highlights.default'));
-        $whatsappMessage = urlencode('Hello, I am interested in ' . $product->name . '. Could you share details?');
+        
+        $priceText = $product->price !== null && $product->price !== '' 
+            ? ' (Rs ' . number_format((float) $product->price, 0) . ')' 
+            : '';
+        $url = request()->url();
+        $message = 'Hello, I am interested in ' . $product->name . $priceText . '. ' . $url . ' Could you share details?';
+        $whatsappMessage = rawurlencode($message);
     @endphp
 
     <section class="product-detail-section">
@@ -85,6 +91,7 @@
 
                     @if($product->price !== null && $product->price !== '')
                         <p class="product-detail-price">Rs {{ number_format((float) $product->price, 0) }}</p>
+                        <p class="product-detail-price-note">Prices may vary with metal rates. Confirm on WhatsApp.</p>
                     @endif
 
                     @if($product->description)
@@ -106,12 +113,6 @@
                                 <span class="product-detail-spec-value">{{ $product->size }}</span>
                             </div>
                         @endif
-                        @if($product->dimensions_display)
-                            <div class="product-detail-spec">
-                                <span class="product-detail-spec-label">Dimensions</span>
-                                <span class="product-detail-spec-value">{{ $product->dimensions_display }}</span>
-                            </div>
-                        @endif
                         @if($product->weight_display)
                             <div class="product-detail-spec">
                                 <span class="product-detail-spec-label">Weight</span>
@@ -126,9 +127,10 @@
                         @endif
                     </div>
 
-                    <div class="product-detail-actions">
+<div class="product-detail-actions">
                         <a href="{{ config('site.whatsapp') ? 'https://wa.me/' . config('site.whatsapp') . '?text=' . $whatsappMessage : route('contact') }}" class="product-detail-btn-primary" target="_blank" rel="noopener">
-                            Enquire about this product <span aria-hidden="true">&rarr;</span>
+                            Enquire on WhatsApp
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0 11.93 11.93 0 0 0 1.38 3.48 11.93 11.93 0 0 0 0 12a11.93 11.93 0 0 0 1.38 8.52A11.93 11.93 0 0 0 12 24a11.93 11.93 0 0 0 10.62-3.48A11.93 11.93 0 0 0 24 12a11.93 11.93 0 0 0 3.48-8.52zM12 22a10.12 10.12 0 0 1-5.16-1.42l-.36-.2-3.06.8.82-2.98-.24-.36A10.12 10.12 0 1 1 22 12a10.12 10.12 0 0 1-10 10zm5.88-7.5a7.86 7.86 0 0 1-4.2 1.2 4.14 4.14 0 0 1-1.98-.54l-1.08-.6-1.14.3a8.96 8.96 0 0 1-4.02-2.64 39.36 39.36 0 0 1-1.44-2.04 4.44 4.44 0 0 1-.24-1.5c0-.42.18-.78.54-1.02l.3-.3.54-.54a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6l-.3.3a6.84 6.84 0 0 0-.36 3.12 6.84 6.84 0 0 0 9.72 0 6.84 6.84 0 0 0 0-9.72.45.45 0 0 1 0-.6l1.62-1.62a.45.45 0 0 1 .6 0l1.62 1.62a.45.45 0 0 1 0 .6 8.34 8.34 0 0 1-1.38 3.24z"/></svg>
                         </a>
                         <button type="button" class="product-detail-btn-copy" id="copyLinkBtn" aria-label="Copy link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
