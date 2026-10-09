@@ -63,7 +63,9 @@
                         <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                            id="cat-{{ $category->slug }}"
                            class="cat-row"
-                           data-reveal>                                <span class="cat-row-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                           data-reveal>
+                            <div class="cat-row-body">
+                                <span class="cat-row-index">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                                 <h2>{{ $category->name }}</h2>
                                 <p class="cat-row-desc">{{ $category->description }}</p>
                                 @if($category->products->count())
