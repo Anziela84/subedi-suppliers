@@ -64,7 +64,7 @@
                     <span class="contact-quick-divider" aria-hidden="true"></span>
                     <span class="contact-quick-text">
                         <span class="contact-quick-title">Visit us</span>
-                        <span class="contact-quick-value">{{ config('site.address_lines')[0] }} · Get directions</span>
+                        <span class="contact-quick-value">{{ config('site.address_lines')[0] }} · View on Google Maps</span>
                         <span class="contact-quick-sub">Our store location</span>
                     </span>
                 </a>
@@ -168,7 +168,7 @@
                         <div>
                             <h3>Find us</h3>
                             <p>{{ implode(', ', config('site.address_lines')) }}</p>
-                            <a class="directions-link" href="{{ config('site.map_directions_url') }}" target="_blank" rel="noopener">Get directions &rarr;</a>
+                            <a class="directions-link" href="{{ config('site.map_directions_url') }}" target="_blank" rel="noopener">View on Google Maps &rarr;</a>
                         </div>
                     </div>
                     @if(config('site.map_embed_url'))
@@ -176,10 +176,11 @@
                             <iframe
                                 src="{{ config('site.map_embed_url') }}"
                                 loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"
+                                referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
                                 title="Map showing the SubediSuppliers store location"
                             ></iframe>
+                            <a class="contact-map-link" href="{{ config('site.map_directions_url') }}" target="_blank" rel="noopener" aria-label="Open SubediSuppliers in Google Maps (opens in a new tab)"><span>Open in Google Maps &nearr;</span></a>
                         </div>
                     @endif
                 </div>

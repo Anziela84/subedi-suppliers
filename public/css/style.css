@@ -2140,6 +2140,107 @@ body.nav-is-open {
     .metal-band-viewport { -webkit-mask-image: none; mask-image: none; }
 }
 
+/* ===================== About page (redesign) ===================== */
+.ab-page { background: var(--color-cream, #FAF8F3); }
+
+/* Metallic gradient tokens (shared by the material band and chapter swatches) */
+.metal-copper { --m-light: #E0995C; --m: #B87333; --m-dark: #8C5324; --m-ink: #FAF8F3; }
+.metal-brass { --m-light: #E2C98F; --m: #C9A66B; --m-dark: #9A7B45; --m-ink: #102A43; }
+.metal-kasa { --m-light: #AE8858; --m: #8C6A3D; --m-dark: #63492A; --m-ink: #FAF8F3; }
+.metal-steel { --m-light: #CBD1D7; --m: #A9B0B8; --m-dark: #7D848B; --m-ink: #102A43; }
+.metal-aluminium { --m-light: #EEF0F2; --m: #D6D9DC; --m-dark: #A8ADB2; --m-ink: #102A43; }
+
+/* Gold-line eyebrow (matches the Contact eyebrow) */
+.ab-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-heritage, #9A7448); }
+.ab-eyebrow-line { display: block; width: 2.5rem; height: 2px; background: #C9A66B; }
+.ab-eyebrow-light { color: #C9A66B; }
+
+/* ---- Hero ---- */
+.ab-hero { padding: 5rem 0 4rem; }
+@media (min-width: 768px) { .ab-hero { padding: 6rem 0 5rem; } }
+.ab-hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1.5rem; }
+@media (min-width: 1024px) {
+    .ab-hero-grid { grid-template-columns: repeat(12, 1fr); gap: 1rem 3rem; align-items: end; margin-top: 2rem; }
+    .ab-headline { grid-column: span 8; }
+    .ab-intro-wrap { grid-column: span 4; }
+}
+.ab-headline { font-family: var(--font-heading, 'Playfair Display', serif); font-weight: 600; color: var(--color-deep-navy, #102A43); font-size: clamp(3rem, 9vw, 7rem); line-height: 0.95; letter-spacing: -0.01em; }
+.ab-line { display: block; }
+.ab-em { font-style: italic; color: var(--color-heritage, #9A7448); }
+.ab-intro-hairline { display: block; width: 3rem; height: 2px; background: var(--color-heritage, #9A7448); margin-bottom: 1rem; }
+.ab-intro { max-width: 24rem; color: var(--color-muted, #68717A); font-size: 1.05rem; line-height: 1.7; }
+
+/* ---- Material band ---- */
+.ab-band { margin-top: 3rem; }
+.ab-band-bars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; }
+.ab-band-seg { display: block; }
+.ab-band-bar { display: block; height: 14px; border-radius: 999px; background: linear-gradient(135deg, var(--m-light, #999), var(--m, #777), var(--m-dark, #555)); transition: height 0.25s ease, box-shadow 0.25s ease; }
+.ab-band-seg:hover .ab-band-bar { height: 22px; box-shadow: 0 4px 12px rgba(16, 42, 67, 0.15); }
+.ab-band-names { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-top: 0.75rem; }
+.ab-band-name { font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-ink, #1E252B); text-decoration: none; }
+.ab-band-name:hover { color: var(--color-heritage, #9A7448); }
+@media (max-width: 767px) {
+    .ab-band-names { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.9rem; }
+}
+
+/* ---- Fact row ---- */
+.ab-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border, #D9D5CC); }
+.ab-fact { font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.85rem; font-weight: 500; color: var(--color-ink, #1E252B); }
+.ab-fact + .ab-fact { border-left: 1px solid var(--color-border, #D9D5CC); padding-left: 2rem; }
+@media (max-width: 640px) { .ab-fact + .ab-fact { border-left: none; padding-left: 0; } }
+
+/* ---- Hero photo (optional) ---- */
+.ab-hero-photo { margin-top: 2.5rem; border-radius: 16px; overflow: hidden; }
+.ab-hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
+@media (min-width: 768px) { .ab-hero-photo img { aspect-ratio: 21 / 9; } }
+
+/* ---- Chapter metal swatch card (no-photo fallback) ---- */
+.about-chapters-slide .ab-swatch, .about-chapter-image .ab-swatch { width: 100%; height: 100%; }
+.ab-swatch { position: relative; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, var(--m-light, #999), var(--m, #777), var(--m-dark, #555)); color: var(--m-ink, #FAF8F3); display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; min-height: 220px; }
+.ab-swatch::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, rgba(0, 0, 0, 0.03) 1px 2px, transparent 2px 4px); }
+.ab-swatch-num { font-family: var(--font-heading, 'Playfair Display', serif); font-size: clamp(3rem, 9vw, 5rem); font-weight: 600; line-height: 1; }
+.ab-swatch-title { font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.5rem; font-weight: 600; }
+
+/* ---- Chapter points list ---- */
+.ab-points { list-style: none; margin: 1.25rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.ab-points li { position: relative; padding-left: 1.25rem; color: var(--color-muted, #68717A); font-size: 1rem; line-height: 1.6; }
+.ab-points li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.75rem; height: 2px; background: var(--color-heritage, #9A7448); }
+
+/* ---- Values (navy, typography-led) ---- */
+.ab-values { background: var(--color-deep-navy, #102A43); color: var(--color-cream, #FAF8F3); padding: 5rem 0; }
+.ab-values-head { max-width: 38rem; margin-bottom: 2.5rem; }
+.ab-values-statement { margin-top: 1.25rem; font-family: var(--font-heading, 'Playfair Display', serif); font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 500; line-height: 1.3; color: var(--color-cream, #FAF8F3); max-width: 38rem; }
+.ab-value-row { display: grid; grid-template-columns: 1fr; gap: 0.4rem; padding: 1.75rem 0; border-top: 1px solid rgba(250, 248, 243, 0.15); transition: background 0.25s ease; }
+.ab-value-num { font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.25rem; font-weight: 600; color: #C9A66B; transition: transform 0.25s ease; }
+.ab-value-title { font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.5rem; font-weight: 600; color: var(--color-cream, #FAF8F3); transition: transform 0.25s ease; }
+.ab-value-text { color: rgba(250, 248, 243, 0.75); font-size: 1rem; line-height: 1.7; }
+.ab-value-row:hover { background: rgba(250, 248, 243, 0.04); }
+.ab-value-row:hover .ab-value-num, .ab-value-row:hover .ab-value-title { transform: translateX(6px); }
+@media (min-width: 1024px) {
+    .ab-value-row { grid-template-columns: 5rem minmax(0, 1fr) minmax(0, 1.3fr); gap: 2rem; align-items: baseline; }
+}
+
+/* ---- Visit the shop ---- */
+.ab-visit { background: var(--color-sand, #F5F1E8); padding: 5rem 0; }
+.ab-visit-heading { margin-top: 0.75rem; font-family: var(--font-heading, 'Playfair Display', serif); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; line-height: 1.1; color: var(--color-deep-navy, #102A43); max-width: 24ch; }
+.ab-visit-grid { margin-top: 3rem; display: grid; grid-auto-flow: row; gap: 2rem; }
+.ab-visit-label { display: block; font-family: var(--font-body, 'Inter', sans-serif); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-heritage, #9A7448); margin-bottom: 0.9rem; }
+.ab-visit-value { font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.25rem; font-weight: 500; line-height: 1.5; color: var(--color-ink, #1E252B); overflow-wrap: anywhere; }
+.ab-visit-value a { color: inherit; text-decoration: none; }
+.ab-visit-value a:hover { color: var(--color-heritage, #9A7448); }
+.ab-visit-link { display: inline-block; margin-top: 1rem; font-family: var(--font-body, 'Inter', sans-serif); font-weight: 600; color: var(--color-deep-navy, #102A43); text-decoration: none; }
+.ab-visit-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ab-visit-actions { margin-top: 1.25rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+.ab-visit-wa { display: inline-flex; align-items: center; gap: 0.5rem; height: 48px; padding: 0 1.25rem; border-radius: 8px; background: #138A45; color: #fff; font-family: var(--font-heading, 'Playfair Display', serif); font-weight: 600; text-decoration: none; }
+.ab-visit-wa:hover { opacity: 0.9; }
+@media (min-width: 1024px) {
+    .ab-visit-grid { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; }
+    .ab-visit-col + .ab-visit-col { border-left: 1px solid rgba(154, 116, 72, 0.3); padding-left: 3rem; }
+}
+@media (max-width: 1023px) {
+    .ab-visit-col + .ab-visit-col { border-top: 1px solid rgba(154, 116, 72, 0.3); padding-top: 2rem; }
+}
+
 /* ---- Contact hero ---- */
 .contact-hero { position: relative; overflow: hidden; background: #102A43; padding: 4.25rem 0 9rem; min-height: 400px; display: flex; align-items: center; justify-content: flex-start; }
 .contact-hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 85%; }
@@ -2218,9 +2319,22 @@ select.contact-input { appearance: none; -webkit-appearance: none; height: 48px;
 .contact-location .open-badge.is-closed { background: rgba(154, 116, 72, 0.14); color: #7a5a37; }
 .directions-link { display: inline-block; margin-top: 0.35rem; font-weight: 600; color: var(--color-brand-blue, #0047AB); text-decoration: none; }
 .directions-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-.contact-location-map { height: 320px; background: #f5f5f5; }
-@media (max-width: 1023px) { .contact-location-map { height: 260px; } }
+.contact-location-map { position: relative; height: 240px; background: #f5f5f5; }
+@media (max-width: 1023px) {
+    .contact-location-map { height: 210px; }
+    /* Let the page scroll past the map on touch screens; the directions link stays the action */
+    .contact-location-map iframe { pointer-events: none; }
+}
 .contact-location-map iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* Clickable map: a transparent link over the embed opens Google Maps in a new tab */
+.contact-map-link { position: absolute; inset: 0; z-index: 2; display: block; background: transparent; cursor: pointer; }
+.contact-map-link span { position: absolute; right: 0.75rem; bottom: 0.75rem; padding: 0.45rem 0.9rem; border-radius: 999px; background: #102A43; color: #FAF8F3; font-size: 0.8rem; font-weight: 600; opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease; }
+.contact-map-link:hover span, .contact-map-link:focus-visible span { opacity: 1; transform: none; }
+.contact-map-link:focus-visible { outline: 2px solid #C9A66B; outline-offset: -2px; }
+@media (hover: none) {
+    .contact-map-link span { opacity: 1; transform: none; }
+}
 
 /* ---- Footer contact ---- */
 .site-footer-links li.with-icon { display: flex; align-items: flex-start; gap: 0.7rem; }
@@ -2764,7 +2878,424 @@ html:has(.cat-page) { scroll-behavior: smooth; }
 @media (scripting: none) {
     .cat-cta-wrap .cta-band.section-dark > div,
     .cat-cta-wrap .cta-band-title, .cat-cta-wrap .cta-band-text, .cat-cta-wrap .cta-band-actions { opacity: 1; transform: none; }
-    .cat-row .cat-row-body > *, .cat-row .cat-row-arrow { opacity: 1; transform: none; }
-    .cat-row .cat-photo { clip-path: none; }
+    .cat-row .cat-row-body > *,
+    .cat-row .cat-photo, .cat-row .cat-row-arrow { opacity: 1; transform: none; }
     .cat-row .cat-row-index::after { transform: none; }
+}
+
+/* =====================================================================
+   About page v2 — full rebuild of /about
+   Sections: hero · sticky chapters (product range) · promise · visit
+   Every rule below is scoped to the About page wrapper (.ab-page) or
+   prefixed with .ab2- so no other page is affected. The existing
+   .about-chapters / .about-chapter / .about-chapters-slide classes and
+   the data-chapter / .is-active behaviour (app.js) are kept untouched.
+   ===================================================================== */
+
+/* ---------- Reveal on scroll (uses the existing app.js observer) ---------- */
+.ab-page [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ab-page [data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    .ab-page [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+@media (scripting: none) {
+    .ab-page [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ---------- Shared type ---------- */
+/* Body grey for this page only (darker than --color-muted, AA on cream) */
+.ab-page { --ab2-muted: #5A636B; }
+.ab-page .ab2-h1 {
+    margin-top: 1.25rem;
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-weight: 600;
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--color-deep-navy, #102A43);
+}
+.ab-page .ab2-em { font-style: italic; color: var(--color-heritage, #9A7448); }
+.ab-page .ab2-h2 {
+    margin-top: 1rem;
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    line-height: 1.12;
+    color: var(--color-deep-navy, #102A43);
+}
+.ab-page .ab2-h2--light { color: var(--color-cream, #FAF8F3); }
+
+/* ---------- 1. Hero ---------- */
+.ab-page .ab2-hero { padding: 3.5rem 1rem 3rem; overflow-x: clip; }
+.ab-page .ab2-hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+.ab-page .ab2-hero-copy { min-width: 0; }
+.ab-page .ab2-lead {
+    margin-top: 1.5rem;
+    max-width: 36ch;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--ab2-muted, #5A636B);
+}
+.ab-page .ab2-hero-frame {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 48px 0 0 0;
+    overflow: hidden;
+    background: var(--color-sand, #F5F1E8);
+}
+.ab-page .ab2-hero-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 640px) {
+    .ab-page .ab2-hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (min-width: 1024px) {
+    .ab-page .ab2-hero {
+        /* Left edge aligned with the site container; right edge free for the image bleed */
+        padding-left: max(2rem, calc((100% - 80rem) / 2 + 2rem));
+        padding-right: 0;
+        padding-top: 5rem;
+        padding-bottom: 4.5rem;
+    }
+    .ab-page .ab2-hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+        gap: 3.5rem;
+        align-items: center;
+    }
+    .ab-page .ab2-hero-grid--no-media { grid-template-columns: minmax(0, 1fr); }
+    .ab-page .ab2-hero-frame { border-radius: 96px 0 0 0; }
+}
+
+/* ---------- 2. Product range (sticky chapters) ---------- */
+.ab-page .ab2-range {
+    background: var(--color-cream, #FAF8F3);
+    padding: 4rem 0 5rem;
+}
+.ab-page .ab2-range-head { max-width: 54rem; }
+.ab-page .ab2-range-intro {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--ab2-muted, #5A636B);
+}
+
+/* The photo frame */
+.ab-page .ab2-range-grid { gap: 0; }
+
+/* Chapter marker: the original large outlined gold numeral (.about-chapter-index) is kept */
+.ab-page .ab2-chapter-title {
+    margin-top: 0.75rem;
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--color-deep-navy, #102A43);
+}
+.ab-page .ab2-chapter-text {
+    margin-top: 1rem;
+    max-width: 36ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--ab2-muted, #5A636B);
+}
+.ab-page .ab2-chapter-link {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 1.35rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(154, 116, 72, 0.55);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-deep-navy, #102A43);
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.ab-page .ab2-chapter-link:hover { color: var(--color-heritage, #9A7448); border-color: var(--color-heritage, #9A7448); }
+
+/* Per-chapter crop of the shared range photo (camera move on crossfade) */
+.ab-page .about-chapters-slide img {
+    object-position: var(--ab2-focus-position, 50% 50%);
+    transform: scale(var(--ab2-focus-scale, 1));
+    transition: transform 1.1s ease;
+}
+
+/* ---------- Sticky chapters: small screens ----------
+   The photo is pinned under the header for the length of the chapter block
+   and the crop swaps with each chapter, so the same "camera move" as the
+   desktop layout still happens on a phone. The chapters scroll underneath it. */
+@media (max-width: 1023px) {
+    .ab-page .about-chapters-grid { display: block; }
+    .ab-page .about-chapters-media {
+        display: block;
+        position: sticky;
+        top: 4.5rem;
+        z-index: 2;
+        margin-bottom: 1.5rem;
+    }
+    .ab-page .about-chapters-frame {
+        width: 100%;
+        height: auto;
+        max-height: 42vh;
+        aspect-ratio: 4 / 3;
+        border-radius: 16px;
+        overflow: hidden;
+        background: var(--color-sand, #F5F1E8);
+        box-shadow: 0 14px 34px rgba(16, 42, 67, 0.12);
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Nothing on the way to the sticky frame may clip it */
+    .ab-page .ab2-range,
+    .ab-page .about-chapters,
+    .ab-page .about-chapters-grid { overflow: visible; }
+    .ab-page .about-chapters-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        gap: 4.5rem;
+        align-items: start;
+        margin-top: 3.5rem;
+    }
+    /* Text chapters on the left, sticky photo frame on the right */
+    .ab-page .about-chapters-text { order: -1; }
+    .ab-page .about-chapters-media {
+        display: flex;
+        position: sticky;
+        top: 6rem;
+        height: 55vh;
+        align-items: center;
+        align-self: start;
+    }
+    .ab-page .about-chapters-frame {
+        width: 100%;
+        height: auto;
+        max-height: 55vh;
+        aspect-ratio: 4 / 3;
+        border-radius: 16px;
+        overflow: hidden;
+        background: var(--color-sand, #F5F1E8);
+        box-shadow: 0 18px 44px rgba(16, 42, 67, 0.12);
+    }
+    .ab-page .about-chapter {
+        min-height: 55vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+/* ---------- 3. Our promise ---------- */
+.ab-page .ab2-promise {
+    background: var(--paper-grain), var(--color-deep-navy, #102A43);
+    color: var(--color-cream, #FAF8F3);
+}
+.ab-page .ab2-promise-grid { display: grid; grid-template-columns: 1fr; }
+.ab-page .ab2-promise-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--color-deep-navy, #102A43);
+}
+.ab-page .ab2-promise-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ab-page .ab2-promise-content { padding: 3.5rem 1rem; }
+.ab-page .ab2-promise-lead {
+    margin-top: 1.25rem;
+    max-width: 46ch;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: rgba(250, 248, 243, 0.9);
+}
+.ab-page .ab2-promise-items { margin-top: 2.75rem; display: grid; grid-template-columns: 1fr; gap: 2rem; }
+.ab-page .ab2-promise-item { min-width: 0; }
+.ab-page .ab2-promise-icon { display: block; width: 28px; height: 28px; color: #C9A66B; }
+.ab-page .ab2-promise-icon svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; }
+.ab-page .ab2-promise-title {
+    margin-top: 1.1rem;
+    min-height: 2.5em; /* keeps the three descriptions on one baseline */
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-cream, #FAF8F3);
+}
+.ab-page .ab2-promise-text {
+    margin-top: 0.6rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(250, 248, 243, 0.8);
+}
+
+@media (max-width: 1023px) {
+    .ab-page .ab2-promise-item + .ab2-promise-item {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(201, 166, 107, 0.3);
+    }
+}
+@media (min-width: 1024px) {
+    .ab-page .ab2-promise-grid { grid-template-columns: 35% 1fr; align-items: stretch; }
+    .ab-page .ab2-promise-grid--no-media { grid-template-columns: 1fr; }
+    .ab-page .ab2-promise-media { aspect-ratio: auto; height: 100%; }
+    .ab-page .ab2-promise-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(16, 42, 67, 0) 55%, rgba(16, 42, 67, 0.85) 100%);
+    }
+    .ab-page .ab2-promise-content { padding: 6rem 5rem 6rem 4.5rem; }
+    .ab-page .ab2-promise-items { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .ab-page .ab2-promise-item { padding: 0 2.25rem; border-left: 1px solid rgba(201, 166, 107, 0.3); }
+    .ab-page .ab2-promise-item:first-child { padding-left: 0; border-left: 0; }
+}
+/* Narrow desktop (1024–1279): give the three promise columns more room */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .ab-page .ab2-promise-grid { grid-template-columns: 30% 1fr; }
+    .ab-page .ab2-promise-content { padding: 4.5rem 3rem; }
+    .ab-page .ab2-promise-item { padding: 0 1.5rem; }
+    .ab-page .ab2-promise-title { font-size: 1.1rem; min-height: 2.5em; }
+}
+
+/* ---------- 4. Visit us ---------- */
+.ab-page .ab2-visit {
+    background: var(--paper-grain), var(--color-sand, #F5F1E8);
+    padding: 4rem 0 4.5rem;
+}
+.ab-page .ab2-visit-inner { max-width: 44rem; }
+.ab-page .ab2-visit-text {
+    margin-top: 1.25rem;
+    max-width: 48ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--ab2-muted, #5A636B);
+}
+.ab-page .ab2-visit-actions {
+    margin-top: 2.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+}
+.ab-page .ab2-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 48px;
+    padding: 0 1.5rem;
+    border-radius: 8px;
+    background: #C9A66B;
+    color: var(--color-deep-navy, #102A43);
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.ab-page .ab2-btn:hover { background: #D8B87E; transform: translateY(-1px); }
+.ab-page .ab2-directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-deep-navy, #102A43);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.ab-page .ab2-directions svg { width: 18px; height: 18px; fill: none; stroke: currentColor; }
+.ab-page .ab2-directions:hover { color: var(--color-heritage, #9A7448); }
+.ab-page .ab2-visit-hours {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ab2-muted, #5A636B);
+}
+
+@media (max-width: 639px) {
+    .ab-page .ab2-visit-actions { flex-direction: column; align-items: stretch; gap: 1.25rem; }
+    .ab-page .ab2-btn, .ab-page .ab2-directions { width: 100%; justify-content: center; }
+}
+
+/* =====================================================================
+   Categories page - "Can't find what you need?" band (light, centred)
+   Replaces the navy CTA card that used to sit between the page and the
+   footer. Every rule below is prefixed .cat-help so no other page and no
+   shared component (.cta-band, .btn-*, .section-dark) is affected.
+   ===================================================================== */
+.cat-help {
+    background: var(--paper-grain), var(--color-sand, #F5F1E8);
+    border-top: 1px solid rgba(154, 116, 72, 0.3);
+    padding: 3.5rem 0;
+    text-align: center;
+}
+.cat-help-inner { max-width: 40rem; margin: 0 auto; }
+.cat-help-title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--color-deep-navy, #102A43);
+}
+.cat-help-text {
+    margin-top: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-muted, #68717A);
+}
+.cat-help-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.cat-help-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.cat-help-btn-gold {
+    background: #C9A66B;
+    color: var(--color-deep-navy, #102A43);
+}
+.cat-help-btn-gold:hover { background: #D8B87E; transform: translateY(-1px); }
+/* WhatsApp green, one step darker than #138A45 so white 17px text stays AA (5.0:1) */
+.cat-help-btn-whatsapp {
+    background: #12803E;
+    color: #FFFFFF;
+}
+.cat-help-btn-whatsapp:hover { background: #0F6C33; transform: translateY(-1px); }
+
+/* Reveal: reuse the existing [data-reveal] fade only */
+.cat-help[data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s var(--cat-ease, cubic-bezier(0.22, 1, 0.36, 1)), transform 0.7s var(--cat-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+.cat-help.is-visible { opacity: 1; transform: none; }
+
+@media (min-width: 640px) {
+    .cat-help { padding: 4.5rem 0; }
+}
+@media (max-width: 639px) {
+    .cat-help-actions { flex-direction: column; }
+    .cat-help-btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cat-help[data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+@media (scripting: none) {
+    .cat-help[data-reveal] { opacity: 1; transform: none; }
 }

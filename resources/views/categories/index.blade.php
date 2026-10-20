@@ -107,11 +107,20 @@
             </div>
         </section>
 
-        <div class="cat-cta-wrap" data-reveal>
-            <x-cta-band
-                title="Can't find what you need?"
-                text="Tell us what you are looking for and we will help you find it."
-            />
-        </div>
+        {{-- Light "Can't find what you need?" band (this page only) --}}
+        <section class="cat-help" data-reveal>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="cat-help-inner">
+                    <h2 class="cat-help-title">Can't find what you need?</h2>
+                    <p class="cat-help-text">Tell us what you are looking for and we will help you find it.</p>
+                    <div class="cat-help-actions">
+                        @if(config('site.whatsapp'))
+                            <a class="cat-help-btn cat-help-btn-whatsapp" href="https://wa.me/{{ config('site.whatsapp') }}" target="_blank" rel="noopener">Message on WhatsApp</a>
+                        @endif
+                        <a class="cat-help-btn cat-help-btn-gold" href="{{ route('contact') }}">Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 @endsection

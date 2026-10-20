@@ -1,28 +1,67 @@
 <?php
 
 return [
-    // TODO: replace with real content from the client
-    'headline' => 'Metalware with a story to tell',
+    'headline' => 'Traditional values. Modern needs.',
 
-    'intro' => 'SubediSuppliers brings Nepali metalware, from traditional pieces to everyday essentials, to homes and businesses.',
+    'intro' => 'At Subedi & Suppliers, we bring together the timeless beauty of Khasa goods and the everyday practicality of metalware — so you can find the right pieces for your home, your rituals and your daily life.',
+
+    // Base names (no extension). The view resolves .webp > .jpg > .jpeg > .png.
+    'images' => [
+        'hero' => 'images/firstimage',
+        'range' => 'images/secondimage',
+        'promise' => 'images/thirdimage',
+    ],
+
+    // Sticky chapters. Optional per chapter:
+    //   'link'  => ['label' => 'Browse Khasa →', 'route' => 'products.index', 'params' => ['category' => 'kasa']]
+    //   'focus' => ['position' => '30% 40%', 'scale' => '1.06']  (crop of the shared range photo)
+    // NOTE: the link is stored as a route name (+ params) instead of a URL, because
+    // config files are loaded before the router is registered and route() would fail.
+    'chapters' => [
+        [
+            'title' => 'Khasa goods',
+            'text' => 'Traditional household and cultural pieces.',
+            'link' => [
+                'label' => 'Browse Khasa →',
+                'route' => 'products.index',
+                'params' => ['category' => 'kasa'],
+            ],
+            'focus' => ['position' => '18% 28%', 'scale' => '1.35'],
+        ],
+        [
+            'title' => 'Metalware',
+            'text' => 'Products for kitchens, homes and everyday needs.',
+            'link' => [
+                'label' => 'Browse all products →',
+                'route' => 'products.index',
+                'params' => [],
+            ],
+            'focus' => ['position' => '62% 62%', 'scale' => '1.15'],
+        ],
+        [
+            'title' => 'The selection',
+            'text' => 'Every piece is chosen for its finish, its weight in the hand and how well it holds up to daily use.',
+            'focus' => ['position' => '50% 50%', 'scale' => '1'],
+        ],
+    ],
 
     'values' => [
         // TODO: confirm with the client
         [
             'title' => 'Craftsmanship',
-            'text' => 'Every piece is chosen for its finish and durability.',
+            'text' => 'Care in material and finish.',
         ],
         [
             'title' => 'Quality',
-            'text' => 'We supply products made to last.',
+            'text' => 'Products chosen for everyday use.',
         ],
         [
             'title' => 'Honest dealing',
-            'text' => 'Clear information and fair service.',
+            'text' => 'Clear and helpful guidance.',
         ],
         [
-            'title' => 'Service',
-            'text' => 'Help with choosing and ordering.',
+            'title' => 'Customer care',
+            'text' => 'Help finding the right product.',
         ],
     ],
 
@@ -32,17 +71,6 @@ return [
 
     'stats' => [
         // TODO: replace with real content from the client
-    ],
-
-    'images' => [
-        'hero' => 'images/about-hero.jpg',
-    ],
-
-    // TODO: replace with the shop's real story and photos (portrait 4:5, 1200x1500)
-    'chapters' => [
-        ['title' => 'The metals', 'text' => 'Copper, brass, kasa, steel and aluminium. We work with the metals that have always had a place in Nepali kitchens, shrines and homes.', 'category' => 'copper', 'image' => 'images/about-chapter-1.jpg'],
-        ['title' => 'The selection', 'text' => 'Every piece is chosen for its finish, its weight in the hand and how well it holds up to daily use.', 'category' => 'brass', 'image' => 'images/about-chapter-2.jpg'],
-        ['title' => 'The shop', 'text' => 'Visit us or message us on WhatsApp. We will help you choose the right piece, whether it is for the puja room, the kitchen or a gift.', 'category' => 'kasa', 'image' => 'images/about-chapter-3.jpg'],
     ],
 
     // TODO: confirm this line with the shop owner
